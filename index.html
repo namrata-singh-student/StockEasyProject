@@ -31,10 +31,10 @@
           <a href="register.html" class="btn btn-primary">Register</a>
         </div>
       </div>
-      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
+      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()" style="display: flex; flex-direction: column; cursor: pointer; padding: 8px;">
+        <span style="width: 25px; height: 3px; background: #2C3E50; margin: 3px 0; transition: 0.3s;"></span>
+        <span style="width: 25px; height: 3px; background: #2C3E50; margin: 3px 0; transition: 0.3s;"></span>
+        <span style="width: 25px; height: 3px; background: #2C3E50; margin: 3px 0; transition: 0.3s;"></span>
       </div>
     </div>
   </nav>
@@ -246,6 +246,31 @@
   <div id="footer-container"></div>
 
   <script src="js/main.js"></script>
+  <script>
+    // Simple mobile menu fix
+    function toggleMobileMenu() {
+      const menu = document.getElementById('navMenu');
+      const hamburger = document.getElementById('hamburger');
+      
+      if (menu.style.display === 'flex') {
+        menu.style.display = 'none';
+        menu.style.left = '-100%';
+      } else {
+        menu.style.display = 'flex';
+        menu.style.position = 'fixed';
+        menu.style.top = '70px';
+        menu.style.left = '0';
+        menu.style.width = '100%';
+        menu.style.height = 'calc(100vh - 70px)';
+        menu.style.background = 'white';
+        menu.style.flexDirection = 'column';
+        menu.style.alignItems = 'center';
+        menu.style.padding = '40px 20px';
+        menu.style.zIndex = '1000';
+        menu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+      }
+    }
+  </script>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeAnimations();
     initializeFeatureCounters();
     checkUserSession();
+    addFeatureModalStyles(); // Initialize modal styles
 });
 
 // Navigation functionality
@@ -388,6 +389,7 @@ function animateCounter(element) {
 
 // Handle feature card clicks
 function handleFeatureClick(feature) {
+    console.log('Feature clicked:', feature); // Debug log
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     
     // Add click animation
@@ -541,6 +543,9 @@ function handleFeatureClick(feature) {
 
 // Show feature demo modal
 function showFeatureDemo(title, data) {
+    // Add modal styles if not already added
+    addFeatureModalStyles();
+    
     const modal = document.createElement('div');
     modal.className = 'feature-modal-overlay';
     modal.innerHTML = `
@@ -568,28 +573,41 @@ function showFeatureDemo(title, data) {
     `;
     
     document.body.appendChild(modal);
+    
+    // Show modal with animation
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.visibility = 'visible';
+    }, 10);
 }
 
-// Mobile Menu Toggle
+// Mobile Menu Toggle - Simplified
 function toggleMobileMenu() {
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
     
     if (navMenu && hamburger) {
+        // Force toggle the classes
         navMenu.classList.toggle('active');
         hamburger.classList.toggle('active');
         
-        // Prevent body scroll when menu is open
+        // Handle body scroll
         if (navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            // Force the menu to show with inline styles as backup
+            navMenu.style.left = '0px';
+            navMenu.style.display = 'flex';
         } else {
             document.body.style.overflow = 'auto';
+            // Force the menu to hide
+            navMenu.style.left = '-100%';
         }
     }
 }
 
 // Close mobile menu when clicking on a link
 function closeMobileMenu() {
+    console.log('Close mobile menu called'); // Debug log
     const navMenu = document.getElementById('navMenu');
     const hamburger = document.getElementById('hamburger');
     
@@ -597,6 +615,7 @@ function closeMobileMenu() {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
         document.body.style.overflow = 'auto';
+        console.log('Mobile menu closed'); // Debug log
     }
 }
 
@@ -638,7 +657,8 @@ function initializeMobileMenu() {
 function closeFeatureModal() {
     const modal = document.querySelector('.feature-modal-overlay');
     if (modal) {
-        modal.classList.remove('active');
+        modal.style.opacity = '0';
+        modal.style.visibility = 'hidden';
         setTimeout(() => {
             modal.remove();
         }, 300);

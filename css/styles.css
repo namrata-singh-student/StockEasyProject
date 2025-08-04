@@ -125,6 +125,8 @@ body {
     padding: 8px;
     border-radius: 4px;
     transition: var(--transition);
+    gap: 4px;
+    z-index: 1001;
 }
 
 .hamburger:hover {
@@ -135,9 +137,9 @@ body {
     width: 25px;
     height: 3px;
     background: var(--text-primary);
-    margin: 3px 0;
-    transition: var(--transition);
     border-radius: 2px;
+    transition: var(--transition);
+    transform-origin: center;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -150,21 +152,6 @@ body {
 
 .hamburger.active span:nth-child(3) {
     transform: rotate(45deg) translate(-5px, -6px);
-}
-
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background: var(--text-primary);
-    border-radius: 2px;
-    transition: var(--transition);
 }
 
 /* Buttons */
@@ -975,31 +962,49 @@ body {
     color: var(--primary-color);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+/* Mobile Menu Base Styles */
+@media (max-width: 1024px) {
     .hamburger {
-        display: flex;
+        display: flex !important;
     }
     
     .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: -100%;
-        width: 100%;
-        height: calc(100vh - 70px);
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 40px 20px;
-        transition: var(--transition);
-        z-index: 999;
-        box-shadow: var(--shadow);
+        display: none;
     }
     
     .nav-menu.active {
-        left: 0;
+        display: flex !important;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex !important;
+    }
+    
+    .nav-menu {
+        position: fixed !important;
+        top: 70px !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: calc(100vh - 70px) !important;
+        background: rgba(255, 255, 255, 0.98) !important;
+        backdrop-filter: blur(10px);
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        padding: 40px 20px !important;
+        transition: left 0.3s ease-in-out !important;
+        z-index: 1000 !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        overflow-y: auto;
+        display: flex !important;
+    }
+    
+    .nav-menu.active {
+        left: 0 !important;
+        transform: translateX(0) !important;
     }
     
     .nav-menu .nav-link {
