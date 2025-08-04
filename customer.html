@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Management - StockEasy</title>
+    <link rel="stylesheet" href="css/pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">StockEasy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="stock.html" class="nav-link">Stock</a>
+                <a href="#" class="nav-link active">Customer</a>
+                <a href="billing.html" class="nav-link">Billing</a>
+                <a href="reports.html" class="nav-link">Reports</a>
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-main">
+        <div class="page-container">
+            <!-- Left Side - Form -->
+            <div class="page-form-section">
+                <div class="page-header">
+                    <h1>Customer Management</h1>
+                    <p class="page-subtitle">Manage customer information and purchase history</p>
+                </div>
+
+                <!-- Customer Management Form -->
+                <form class="page-form" id="customerForm">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" onclick="switchTab('add')">Add Customer</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('search')">Search Customer</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('history')">Purchase History</button>
+                    </div>
+
+                    <!-- Add Customer Tab -->
+                    <div id="add-tab" class="tab-content active">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerName">Full Name *</label>
+                                <input type="text" id="customerName" name="customerName" required
+                                    placeholder="Enter customer name">
+                                <i class="fas fa-user input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">Phone Number *</label>
+                                <input type="tel" id="customerPhone" name="customerPhone" required
+                                    placeholder="Enter phone number">
+                                <i class="fas fa-phone input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerEmail">Email Address</label>
+                                <input type="email" id="customerEmail" name="customerEmail"
+                                    placeholder="Enter email address">
+                                <i class="fas fa-envelope input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerAge">Age</label>
+                                <input type="number" id="customerAge" name="customerAge" placeholder="Enter age">
+                                <i class="fas fa-birthday-cake input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerGender">Gender</label>
+                                <select id="customerGender" name="customerGender">
+                                    <option value="">Select Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <i class="fas fa-venus-mars input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerType">Customer Type</label>
+                                <select id="customerType" name="customerType">
+                                    <option value="regular">Regular</option>
+                                    <option value="senior">Senior Citizen</option>
+                                    <option value="healthcare">Healthcare Worker</option>
+                                    <option value="corporate">Corporate</option>
+                                </select>
+                                <i class="fas fa-tags input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerAddress">Address</label>
+                            <textarea id="customerAddress" name="customerAddress" rows="3"
+                                placeholder="Enter complete address"></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="emergencyContact">Emergency Contact</label>
+                                <input type="tel" id="emergencyContact" name="emergencyContact"
+                                    placeholder="Emergency contact number">
+                                <i class="fas fa-phone-alt input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorName">Doctor Name</label>
+                                <input type="text" id="doctorName" name="doctorName" placeholder="Regular doctor name">
+                                <i class="fas fa-user-md input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="medicalHistory">Medical History/Allergies</label>
+                            <textarea id="medicalHistory" name="medicalHistory" rows="3"
+                                placeholder="Enter any known allergies or medical conditions"></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="loyaltyProgram" name="loyaltyProgram">
+                                <span class="checkmark"></span>
+                                Enroll in Loyalty Program
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-user-plus"></i> Add Customer
+                        </button>
+                    </div>
+
+                    <!-- Search Customer Tab -->
+                    <div id="search-tab" class="tab-content">
+                        <div class="search-section">
+                            <div class="form-group">
+                                <label for="searchCustomer">Search Customer</label>
+                                <input type="text" id="searchCustomer" placeholder="Search by name, phone, or email">
+                                <i class="fas fa-search input-icon"></i>
+                            </div>
+
+                            <div class="filter-options">
+                                <div class="form-group">
+                                    <label for="filterType">Filter by Type</label>
+                                    <select id="filterType">
+                                        <option value="">All Customers</option>
+                                        <option value="regular">Regular</option>
+                                        <option value="senior">Senior Citizen</option>
+                                        <option value="healthcare">Healthcare Worker</option>
+                                        <option value="corporate">Corporate</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filterActivity">Activity Status</label>
+                                    <select id="filterActivity">
+                                        <option value="">All Status</option>
+                                        <option value="active">Active (Last 30 days)</option>
+                                        <option value="inactive">Inactive</option>
+                                        <option value="new">New Customers</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" onclick="searchCustomers()">
+                                <i class="fas fa-search"></i> Search Customers
+                            </button>
+                        </div>
+
+                        <!-- Search Results -->
+                        <div class="search-results" id="customerResults">
+                            <div class="result-item">
+                                <div class="customer-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="result-info">
+                                    <h4>Rajesh Kumar</h4>
+                                    <p>Phone: +91 9876543210 | Email: rajesh@email.com</p>
+                                    <span class="status-badge success">Active Customer</span>
+                                    <small>Last Purchase: 2 days ago</small>
+                                </div>
+                                <div class="result-actions">
+                                    <button class="btn-small btn-outline">Edit</button>
+                                    <button class="btn-small btn-primary">New Sale</button>
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <div class="customer-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="result-info">
+                                    <h4>Priya Sharma</h4>
+                                    <p>Phone: +91 9876543211 | Email: priya@email.com</p>
+                                    <span class="status-badge warning">Senior Citizen</span>
+                                    <small>Last Purchase: 1 week ago</small>
+                                </div>
+                                <div class="result-actions">
+                                    <button class="btn-small btn-outline">Edit</button>
+                                    <button class="btn-small btn-primary">New Sale</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Purchase History Tab -->
+                    <div id="history-tab" class="tab-content">
+                        <div class="form-group">
+                            <label for="historySearch">Select Customer</label>
+                            <input type="text" id="historySearch" placeholder="Search customer for purchase history">
+                            <i class="fas fa-search input-icon"></i>
+                        </div>
+
+                        <div class="history-filters">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dateFrom">From Date</label>
+                                    <input type="date" id="dateFrom">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateTo">To Date</label>
+                                    <input type="date" id="dateTo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Purchase History Results -->
+                        <div class="purchase-history" id="purchaseHistory">
+                            <div class="history-item">
+                                <div class="history-date">
+                                    <span class="date">Dec 15, 2024</span>
+                                    <span class="time">2:30 PM</span>
+                                </div>
+                                <div class="history-details">
+                                    <h4>Invoice #INV-001</h4>
+                                    <p>Paracetamol 500mg (x2), Cough Syrup (x1)</p>
+                                    <span class="amount">₹245.00</span>
+                                </div>
+                                <div class="history-actions">
+                                    <button class="btn-small btn-outline">View</button>
+                                    <button class="btn-small btn-primary">Reorder</button>
+                                </div>
+                            </div>
+                            <div class="history-item">
+                                <div class="history-date">
+                                    <span class="date">Dec 10, 2024</span>
+                                    <span class="time">11:15 AM</span>
+                                </div>
+                                <div class="history-details">
+                                    <h4>Invoice #INV-002</h4>
+                                    <p>Vitamin D3 (x1), Calcium Tablets (x1)</p>
+                                    <span class="amount">₹180.00</span>
+                                </div>
+                                <div class="history-actions">
+                                    <button class="btn-small btn-outline">View</button>
+                                    <button class="btn-small btn-primary">Reorder</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Customer Stats -->
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">847</span>
+                            <span class="stat-label">Total Customers</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon success">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">156</span>
+                            <span class="stat-label">Active This Month</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">234</span>
+                            <span class="stat-label">Loyalty Members</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Illustration -->
+            <div class="page-illustration">
+                <div class="illustration-content">
+                    <div class="customer-visual">
+                        <div class="customer-network">
+                            <div class="customer-node main">
+                                <i class="fas fa-store"></i>
+                                <span>Your Pharmacy</span>
+                            </div>
+                            <div class="customer-node">
+                                <i class="fas fa-user"></i>
+                                <span>Regular</span>
+                            </div>
+                            <div class="customer-node">
+                                <i class="fas fa-user-tie"></i>
+                                <span>Corporate</span>
+                            </div>
+                            <div class="customer-node">
+                                <i class="fas fa-user-md"></i>
+                                <span>Healthcare</span>
+                            </div>
+                            <div class="customer-node">
+                                <i class="fas fa-user-clock"></i>
+                                <span>Senior</span>
+                            </div>
+                        </div>
+                        <div class="customer-benefits">
+                            <h3>Customer Benefits</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Purchase History Tracking</li>
+                                <li><i class="fas fa-check"></i> Loyalty Program</li>
+                                <li><i class="fas fa-check"></i> Medical History Records</li>
+                                <li><i class="fas fa-check"></i> Quick Reorders</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/pages.js"></script>
+</body>
+
+</html>

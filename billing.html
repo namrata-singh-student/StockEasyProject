@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing & Sales - StockEasy</title>
+    <link rel="stylesheet" href="css/pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">StockEasy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="stock.html" class="nav-link">Stock</a>
+                <a href="customer.html" class="nav-link">Customer</a>
+                <a href="#" class="nav-link active">Billing</a>
+                <a href="reports.html" class="nav-link">Reports</a>
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-main">
+        <div class="page-container">
+            <!-- Left Side - Form -->
+            <div class="page-form-section">
+                <div class="page-header">
+                    <h1>Billing & Sales</h1>
+                    <p class="page-subtitle">Process sales with FEFO logic and generate professional bills</p>
+                </div>
+
+                <!-- Billing Form -->
+                <form class="page-form" id="billingForm">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" onclick="switchTab('new')">New Sale</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('history')">Sales History</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('returns')">Returns</button>
+                    </div>
+
+                    <!-- New Sale Tab -->
+                    <div id="new-tab" class="tab-content active">
+                        <!-- Customer Information -->
+                        <div class="section-header">
+                            <h3>Customer Information</h3>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="customerSelect">Customer</label>
+                                <input type="text" id="customerSelect" placeholder="Search customer or enter name">
+                                <i class="fas fa-user input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerPhone">Phone Number</label>
+                                <input type="tel" id="customerPhone" placeholder="Enter phone number">
+                                <i class="fas fa-phone input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prescriptionNo">Prescription No.</label>
+                                <input type="text" id="prescriptionNo" placeholder="Enter prescription number">
+                                <i class="fas fa-file-medical input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="doctorName">Doctor Name</label>
+                                <input type="text" id="doctorName" placeholder="Enter doctor name">
+                                <i class="fas fa-user-md input-icon"></i>
+                            </div>
+                        </div>
+
+                        <!-- Medicine Selection -->
+                        <div class="section-header">
+                            <h3>Medicine Selection</h3>
+                        </div>
+
+                        <div class="medicine-search">
+                            <div class="form-group">
+                                <label for="medicineSearch">Search Medicine</label>
+                                <input type="text" id="medicineSearch" placeholder="Type medicine name..."
+                                    onkeyup="searchMedicines()">
+                                <i class="fas fa-search input-icon"></i>
+                            </div>
+                            <div class="search-suggestions" id="medicineSuggestions">
+                                <div class="suggestion-item"
+                                    onclick="selectMedicine('Paracetamol 500mg', 'PAR001', 25.00, 50)">
+                                    <div class="suggestion-info">
+                                        <strong>Paracetamol 500mg</strong>
+                                        <span>Batch: PAR001 | Stock: 50 | ₹25.00 | Exp: Dec 2024</span>
+                                        <span class="fefo-badge">FEFO Priority</span>
+                                    </div>
+                                </div>
+                                <div class="suggestion-item"
+                                    onclick="selectMedicine('Amoxicillin 250mg', 'AMX002', 45.00, 30)">
+                                    <div class="suggestion-info">
+                                        <strong>Amoxicillin 250mg</strong>
+                                        <span>Batch: AMX002 | Stock: 30 | ₹45.00 | Exp: Mar 2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Selected Medicines -->
+                        <div class="selected-medicines">
+                            <div class="section-header">
+                                <h3>Selected Medicines</h3>
+                            </div>
+                            <div class="medicine-list" id="medicineList">
+                                <div class="medicine-item">
+                                    <div class="medicine-info">
+                                        <h4>Paracetamol 500mg</h4>
+                                        <p>Batch: PAR001 | Available: 50</p>
+                                    </div>
+                                    <div class="medicine-controls">
+                                        <input type="number" value="2" min="1" max="50" class="qty-input">
+                                        <span class="price">₹25.00</span>
+                                        <span class="total">₹50.00</span>
+                                        <button type="button" class="remove-btn" onclick="removeMedicine(this)">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Details -->
+                        <div class="section-header">
+                            <h3>Payment Details</h3>
+                        </div>
+
+                        <div class="payment-summary">
+                            <div class="summary-row">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">₹50.00</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Discount:</span>
+                                <input type="number" id="discount" value="0" step="0.01" onchange="calculateTotal()">
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (GST):</span>
+                                <span id="tax">₹9.00</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total Amount:</span>
+                                <span id="totalAmount">₹59.00</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="paymentMethod">Payment Method</label>
+                                <select id="paymentMethod">
+                                    <option value="cash">Cash</option>
+                                    <option value="card">Card</option>
+                                    <option value="upi">UPI</option>
+                                    <option value="credit">Credit</option>
+                                </select>
+                                <i class="fas fa-credit-card input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="amountReceived">Amount Received</label>
+                                <input type="number" id="amountReceived" step="0.01" placeholder="0.00"
+                                    onchange="calculateChange()">
+                                <i class="fas fa-rupee-sign input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="change-display" id="changeDisplay" style="display: none;">
+                            <span>Change to Return: </span>
+                            <span id="changeAmount">₹0.00</span>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-outline" onclick="clearSale()">Clear</button>
+                            <button type="button" class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-print"></i> Generate Bill
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Sales History Tab -->
+                    <div id="history-tab" class="tab-content">
+                        <div class="search-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="searchInvoice">Search by Invoice/Customer</label>
+                                    <input type="text" id="searchInvoice"
+                                        placeholder="Enter invoice number or customer name">
+                                    <i class="fas fa-search input-icon"></i>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateRange">Date Range</label>
+                                    <select id="dateRange">
+                                        <option value="today">Today</option>
+                                        <option value="week">This Week</option>
+                                        <option value="month">This Month</option>
+                                        <option value="custom">Custom Range</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sales History Results -->
+                        <div class="sales-history" id="salesHistory">
+                            <div class="history-item">
+                                <div class="invoice-info">
+                                    <h4>Invoice #INV-001</h4>
+                                    <p>Customer: Rajesh Kumar | Phone: +91 9876543210</p>
+                                    <span class="date">Dec 15, 2024 - 2:30 PM</span>
+                                </div>
+                                <div class="invoice-details">
+                                    <span class="amount">₹245.00</span>
+                                    <span class="payment-method">Cash</span>
+                                </div>
+                                <div class="invoice-actions">
+                                    <button class="btn-small btn-outline">View</button>
+                                    <button class="btn-small btn-secondary">Print</button>
+                                    <button class="btn-small btn-danger">Return</button>
+                                </div>
+                            </div>
+                            <div class="history-item">
+                                <div class="invoice-info">
+                                    <h4>Invoice #INV-002</h4>
+                                    <p>Customer: Priya Sharma | Phone: +91 9876543211</p>
+                                    <span class="date">Dec 15, 2024 - 11:15 AM</span>
+                                </div>
+                                <div class="invoice-details">
+                                    <span class="amount">₹180.00</span>
+                                    <span class="payment-method">UPI</span>
+                                </div>
+                                <div class="invoice-actions">
+                                    <button class="btn-small btn-outline">View</button>
+                                    <button class="btn-small btn-secondary">Print</button>
+                                    <button class="btn-small btn-danger">Return</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Returns Tab -->
+                    <div id="returns-tab" class="tab-content">
+                        <div class="form-group">
+                            <label for="returnInvoice">Invoice Number</label>
+                            <input type="text" id="returnInvoice" placeholder="Enter invoice number for return">
+                            <i class="fas fa-search input-icon"></i>
+                        </div>
+
+                        <div class="return-details" id="returnDetails" style="display: none;">
+                            <div class="section-header">
+                                <h3>Return Details</h3>
+                            </div>
+
+                            <div class="return-items">
+                                <div class="return-item">
+                                    <div class="item-info">
+                                        <h4>Paracetamol 500mg</h4>
+                                        <p>Batch: PAR001 | Sold Qty: 2 | Unit Price: ₹25.00</p>
+                                    </div>
+                                    <div class="return-controls">
+                                        <label>Return Qty:</label>
+                                        <input type="number" value="1" min="0" max="2" class="return-qty">
+                                        <span class="return-amount">₹25.00</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="returnReason">Return Reason</label>
+                                <select id="returnReason">
+                                    <option value="">Select Reason</option>
+                                    <option value="defective">Defective Product</option>
+                                    <option value="wrong_medicine">Wrong Medicine</option>
+                                    <option value="customer_request">Customer Request</option>
+                                    <option value="expired">Expired</option>
+                                    <option value="doctor_change">Doctor Changed Prescription</option>
+                                </select>
+                            </div>
+
+                            <div class="return-summary">
+                                <div class="summary-row">
+                                    <span>Return Amount:</span>
+                                    <span id="returnAmount">₹25.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Refund Method:</span>
+                                    <select id="refundMethod">
+                                        <option value="cash">Cash</option>
+                                        <option value="card">Card Refund</option>
+                                        <option value="store_credit">Store Credit</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-danger btn-full">
+                                <i class="fas fa-undo"></i> Process Return
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Sales Stats -->
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-cash-register"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₹15,420</span>
+                            <span class="stat-label">Today's Sales</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon success">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">47</span>
+                            <span class="stat-label">Bills Generated</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon warning">
+                            <i class="fas fa-undo"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Returns Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Illustration -->
+            <div class="page-illustration">
+                <div class="illustration-content">
+                    <div class="billing-visual">
+                        <div class="pos-system">
+                            <div class="pos-screen">
+                                <div class="screen-header">
+                                    <span>StockEasy POS</span>
+                                </div>
+                                <div class="screen-content">
+                                    <div class="bill-item">Paracetamol 500mg x2</div>
+                                    <div class="bill-item">Cough Syrup x1</div>
+                                    <div class="bill-total">Total: ₹245.00</div>
+                                </div>
+                            </div>
+                            <div class="pos-printer">
+                                <div class="printer-paper"></div>
+                            </div>
+                        </div>
+                        <div class="fefo-indicator">
+                            <h3>FEFO Smart Billing</h3>
+                            <p>Automatically suggests medicines with nearest expiry dates first</p>
+                            <div class="fefo-benefits">
+                                <div class="benefit">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Reduces Waste</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span>Maximizes Profit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="js/main.js"></script>
+    <script src="js/pages.js"></script>
+</body>
+
+</html>

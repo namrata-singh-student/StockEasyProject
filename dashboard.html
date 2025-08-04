@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - StockEasy</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-logo">
+            <div class="logo-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <span class="logo-text">StockEasy</span>
+        </div>
+        <div class="nav-actions">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search medicines...">
+            </div>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="Profile" class="profile-avatar">
+                <span class="profile-name" id="userName">Shop Owner</span>
+                <div class="profile-dropdown">
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user"></i> Profile
+                    </a>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </a>
+                    <a href="#" class="dropdown-item" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item active" data-section="overview">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#" class="menu-item" data-section="stock">
+                    <i class="fas fa-pills"></i>
+                    <span>Stock</span>
+                </a>
+                <a href="#" class="menu-item" data-section="sales">
+                    <i class="fas fa-cash-register"></i>
+                    <span>Sales</span>
+                </a>
+                <a href="#" class="menu-item" data-section="customers">
+                    <i class="fas fa-users"></i>
+                    <span>Customers</span>
+                </a>
+                <a href="#" class="menu-item" data-section="reports">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="#" class="menu-item" data-section="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h1>Dashboard Overview</h1>
+                    <p>Welcome back! Here's what's happening with your pharmacy today.</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Medicines</h3>
+                            <p class="stat-number">1,245</p>
+                            <span class="stat-change positive">+12 this week</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Expiring Soon</h3>
+                            <p class="stat-number">23</p>
+                            <span class="stat-change negative">Needs attention</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Today's Sales</h3>
+                            <p class="stat-number">₹15,420</p>
+                            <span class="stat-change positive">+8.5% from yesterday</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Customers Served</h3>
+                            <p class="stat-number">47</p>
+                            <span class="stat-change positive">+5 from yesterday</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="showAddMedicineModal()">
+                            <i class="fas fa-plus"></i>
+                            <span>Add Medicine</span>
+                        </button>
+                        <button class="action-btn" onclick="showSaleModal()">
+                            <i class="fas fa-cash-register"></i>
+                            <span>New Sale</span>
+                        </button>
+                        <button class="action-btn" onclick="showSection('stock')">
+                            <i class="fas fa-search"></i>
+                            <span>Check Stock</span>
+                        </button>
+                        <button class="action-btn" onclick="showSection('reports')">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>View Reports</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expiry Alerts -->
+                <div class="alerts-section">
+                    <h2>Expiry Alerts</h2>
+                    <div class="alert-list">
+                        <div class="alert-item urgent">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Paracetamol 500mg</h4>
+                                <p>Expires in 2 days - Batch: PAR001</p>
+                                <span class="alert-quantity">Quantity: 50 tablets</span>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn-small btn-primary">Mark Sale</button>
+                                <button class="btn-small btn-outline">Remove</button>
+                            </div>
+                        </div>
+                        <div class="alert-item warning">
+                            <div class="alert-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="alert-content">
+                                <h4>Amoxicillin 250mg</h4>
+                                <p>Expires in 7 days - Batch: AMX002</p>
+                                <span class="alert-quantity">Quantity: 30 capsules</span>
+                            </div>
+                            <div class="alert-actions">
+                                <button class="btn-small btn-primary">Mark Sale</button>
+                                <button class="btn-small btn-outline">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stock Section -->
+            <section id="stock" class="content-section">
+                <div class="section-header">
+                    <h1>Medicine Stock</h1>
+                    <button class="btn btn-primary" onclick="showAddMedicineModal()">
+                        <i class="fas fa-plus"></i> Add Medicine
+                    </button>
+                </div>
+                <div class="placeholder-content">
+                    <i class="fas fa-pills"></i>
+                    <h3>Stock Management</h3>
+                    <p>This section will contain medicine inventory management features.</p>
+                </div>
+            </section>
+
+            <!-- Sales Section -->
+            <section id="sales" class="content-section">
+                <div class="section-header">
+                    <h1>Sales Management</h1>
+                    <button class="btn btn-primary" onclick="showSaleModal()">
+                        <i class="fas fa-plus"></i> New Sale
+                    </button>
+                </div>
+                <div class="placeholder-content">
+                    <i class="fas fa-cash-register"></i>
+                    <h3>Sales & Billing</h3>
+                    <p>This section will contain sales recording and billing features.</p>
+                </div>
+            </section>
+
+            <!-- Customers Section -->
+            <section id="customers" class="content-section">
+                <div class="section-header">
+                    <h1>Customer Management</h1>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Customer
+                    </button>
+                </div>
+                <div class="placeholder-content">
+                    <i class="fas fa-users"></i>
+                    <h3>Customer Database</h3>
+                    <p>This section will contain customer management features.</p>
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reports" class="content-section">
+                <div class="section-header">
+                    <h1>Reports & Analytics</h1>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                </div>
+                <div class="placeholder-content">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Sales Analytics</h3>
+                    <p>This section will contain detailed reports and analytics.</p>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="content-section">
+                <div class="section-header">
+                    <h1>Profile Settings</h1>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+                <div class="placeholder-content">
+                    <i class="fas fa-user"></i>
+                    <h3>Profile Management</h3>
+                    <p>This section will contain profile and settings management.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals will be added here -->
+    <div id="modalContainer"></div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

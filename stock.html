@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management - StockEasy</title>
+    <link rel="stylesheet" href="css/pages.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="page-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <span class="logo-text">StockEasy</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="#" class="nav-link active">Stock</a>
+                <a href="customer.html" class="nav-link">Customer</a>
+                <a href="billing.html" class="nav-link">Billing</a>
+                <a href="reports.html" class="nav-link">Reports</a>
+                <div class="nav-buttons">
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                    <a href="register.html" class="btn btn-primary">Register</a>
+                </div>
+            </div>
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-main">
+        <div class="page-container">
+            <!-- Left Side - Form -->
+            <div class="page-form-section">
+                <div class="page-header">
+                    <h1>Medicine Stock Management</h1>
+                    <p class="page-subtitle">Add, update, and manage your medicine inventory with FEFO logic</p>
+                </div>
+
+                <!-- Stock Management Form -->
+                <form class="page-form" id="stockForm">
+                    <div class="form-tabs">
+                        <button type="button" class="tab-btn active" onclick="switchTab('add')">Add Medicine</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('search')">Search Stock</button>
+                        <button type="button" class="tab-btn" onclick="switchTab('update')">Update Stock</button>
+                    </div>
+
+                    <!-- Add Medicine Tab -->
+                    <div id="add-tab" class="tab-content active">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="medicineName">Medicine Name *</label>
+                                <input type="text" id="medicineName" name="medicineName" required
+                                    placeholder="Enter medicine name">
+                                <i class="fas fa-pills input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="genericName">Generic Name</label>
+                                <input type="text" id="genericName" name="genericName" placeholder="Enter generic name">
+                                <i class="fas fa-capsules input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="manufacturer">Manufacturer *</label>
+                                <input type="text" id="manufacturer" name="manufacturer" required
+                                    placeholder="Enter manufacturer">
+                                <i class="fas fa-industry input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category" name="category">
+                                    <option value="">Select Category</option>
+                                    <option value="tablet">Tablet</option>
+                                    <option value="capsule">Capsule</option>
+                                    <option value="syrup">Syrup</option>
+                                    <option value="injection">Injection</option>
+                                    <option value="ointment">Ointment</option>
+                                </select>
+                                <i class="fas fa-list input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="batchNumber">Batch Number *</label>
+                                <input type="text" id="batchNumber" name="batchNumber" required
+                                    placeholder="Enter batch number">
+                                <i class="fas fa-barcode input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity">Quantity *</label>
+                                <input type="number" id="quantity" name="quantity" required
+                                    placeholder="Enter quantity">
+                                <i class="fas fa-sort-numeric-up input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="unitPrice">Unit Price (₹) *</label>
+                                <input type="number" id="unitPrice" name="unitPrice" step="0.01" required
+                                    placeholder="0.00">
+                                <i class="fas fa-rupee-sign input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="sellingPrice">Selling Price (₹) *</label>
+                                <input type="number" id="sellingPrice" name="sellingPrice" step="0.01" required
+                                    placeholder="0.00">
+                                <i class="fas fa-tag input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mfgDate">Manufacturing Date *</label>
+                                <input type="date" id="mfgDate" name="mfgDate" required>
+                                <i class="fas fa-calendar input-icon"></i>
+                            </div>
+                            <div class="form-group">
+                                <label for="expDate">Expiry Date *</label>
+                                <input type="date" id="expDate" name="expDate" required>
+                                <i class="fas fa-calendar-times input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea id="description" name="description" rows="3"
+                                placeholder="Enter medicine description or notes"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fas fa-plus"></i> Add to Stock
+                        </button>
+                    </div>
+
+                    <!-- Search Stock Tab -->
+                    <div id="search-tab" class="tab-content">
+                        <div class="search-section">
+                            <div class="form-group">
+                                <label for="searchMedicine">Search Medicine</label>
+                                <input type="text" id="searchMedicine"
+                                    placeholder="Search by name, batch, or manufacturer">
+                                <i class="fas fa-search input-icon"></i>
+                            </div>
+
+                            <div class="filter-options">
+                                <div class="form-group">
+                                    <label for="filterCategory">Filter by Category</label>
+                                    <select id="filterCategory">
+                                        <option value="">All Categories</option>
+                                        <option value="tablet">Tablet</option>
+                                        <option value="capsule">Capsule</option>
+                                        <option value="syrup">Syrup</option>
+                                        <option value="injection">Injection</option>
+                                        <option value="ointment">Ointment</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filterExpiry">Expiry Status</label>
+                                    <select id="filterExpiry">
+                                        <option value="">All Stock</option>
+                                        <option value="expiring">Expiring Soon</option>
+                                        <option value="expired">Expired</option>
+                                        <option value="fresh">Fresh Stock</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-primary" onclick="searchStock()">
+                                <i class="fas fa-search"></i> Search Stock
+                            </button>
+                        </div>
+
+                        <!-- Search Results -->
+                        <div class="search-results" id="searchResults">
+                            <div class="result-item">
+                                <div class="result-info">
+                                    <h4>Paracetamol 500mg</h4>
+                                    <p>Batch: PAR001 | Qty: 50 | Expires: 2024-12-15</p>
+                                    <span class="status-badge warning">Expiring Soon</span>
+                                </div>
+                                <div class="result-actions">
+                                    <button class="btn-small btn-outline">Edit</button>
+                                    <button class="btn-small btn-primary">Sell</button>
+                                </div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-info">
+                                    <h4>Amoxicillin 250mg</h4>
+                                    <p>Batch: AMX002 | Qty: 30 | Expires: 2025-03-20</p>
+                                    <span class="status-badge success">Fresh Stock</span>
+                                </div>
+                                <div class="result-actions">
+                                    <button class="btn-small btn-outline">Edit</button>
+                                    <button class="btn-small btn-primary">Sell</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Update Stock Tab -->
+                    <div id="update-tab" class="tab-content">
+                        <div class="form-group">
+                            <label for="updateSearch">Find Medicine to Update</label>
+                            <input type="text" id="updateSearch" placeholder="Search by name or batch number">
+                            <i class="fas fa-search input-icon"></i>
+                        </div>
+
+                        <div class="update-form" id="updateForm" style="display: none;">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="updateQuantity">New Quantity</label>
+                                    <input type="number" id="updateQuantity" placeholder="Enter new quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="updatePrice">New Price (₹)</label>
+                                    <input type="number" id="updatePrice" step="0.01" placeholder="0.00">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="updateReason">Reason for Update</label>
+                                <select id="updateReason">
+                                    <option value="">Select Reason</option>
+                                    <option value="restock">New Stock Received</option>
+                                    <option value="adjustment">Stock Adjustment</option>
+                                    <option value="damage">Damaged Stock</option>
+                                    <option value="return">Customer Return</option>
+                                    <option value="price_change">Price Change</option>
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-full">
+                                <i class="fas fa-sync"></i> Update Stock
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Quick Stats -->
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">1,245</span>
+                            <span class="stat-label">Total Medicines</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon urgent">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">23</span>
+                            <span class="stat-label">Expiring Soon</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon success">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₹2.5L</span>
+                            <span class="stat-label">Stock Value</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Illustration -->
+            <div class="page-illustration">
+                <div class="illustration-content">
+                    <div class="stock-visual">
+                        <div class="medicine-shelf">
+                            <div class="shelf-row">
+                                <div class="medicine-box fresh"></div>
+                                <div class="medicine-box fresh"></div>
+                                <div class="medicine-box warning"></div>
+                            </div>
+                            <div class="shelf-row">
+                                <div class="medicine-box fresh"></div>
+                                <div class="medicine-box expired"></div>
+                                <div class="medicine-box fresh"></div>
+                            </div>
+                            <div class="shelf-row">
+                                <div class="medicine-box warning"></div>
+                                <div class="medicine-box fresh"></div>
+                                <div class="medicine-box fresh"></div>
+                            </div>
+                        </div>
+                        <div class="fefo-indicator">
+                            <h3>FEFO Logic Active</h3>
+                            <p>First-Expiry-First-Out system ensures optimal stock rotation</p>
+                            <div class="fefo-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/main.js"></script>
+    <script src="js/pages.js"></script>
+</body>
+
+</html>

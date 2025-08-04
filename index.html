@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StockEasy - Medicine Stock Management</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <div class="logo-icon">
+          <i class="fas fa-heartbeat"></i>
+        </div>
+        <span class="logo-text">StockEasy</span>
+      </div>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="stock.html" class="nav-link">Stock</a>
+        <a href="customer.html" class="nav-link">Customer</a>
+        <a href="billing.html" class="nav-link">Billing</a>
+        <a href="reports.html" class="nav-link">Reports</a>
+        <div class="nav-buttons">
+          <a href="login.html" class="btn btn-outline">Sign In</a>
+          <a href="register.html" class="btn btn-primary">Register</a>
+        </div>
+      </div>
+      <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Medicine Stock Management
+          <span class="highlight">Made Easy</span>
+        </h1>
+        <p class="hero-subtitle">
+          Now it is very easy to maintain stock.<br>
+          Save your time and enjoy the day.
+        </p>
+        <div class="hero-buttons">
+          <a href="register.html" class="btn btn-primary btn-large">Get Started</a>
+          <a href="#features" class="btn btn-outline btn-large">Learn More</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Active Pharmacies</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">10K+</span>
+            <span class="stat-label">Medicines Tracked</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">99%</span>
+            <span class="stat-label">Uptime</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="medical-illustration">
+          <div class="doctor-figure">
+            <div class="doctor-body"></div>
+            <div class="doctor-coat"></div>
+            <div class="stethoscope"></div>
+          </div>
+          <div class="nurse-figure">
+            <div class="nurse-body"></div>
+            <div class="nurse-uniform"></div>
+          </div>
+          <div class="heart-monitor">
+            <i class="fas fa-heartbeat"></i>
+          </div>
+          <div class="medicine-bottle">
+            <i class="fas fa-pills"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2>Powerful Features</h2>
+        <p>Everything you need to manage your medicine stock efficiently</p>
+        <div class="feature-stats">
+          <div class="feature-stat">
+            <span class="stat-number" data-target="500">0</span>
+            <span class="stat-label">Active Users</span>
+          </div>
+          <div class="feature-stat">
+            <span class="stat-number" data-target="10000">0</span>
+            <span class="stat-label">Medicines Tracked</span>
+          </div>
+          <div class="feature-stat">
+            <span class="stat-number" data-target="99">0</span>
+            <span class="stat-label">Uptime %</span>
+          </div>
+        </div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card" data-feature="stock" onclick="handleFeatureClick('stock')">
+          <div class="feature-icon">
+            <i class="fas fa-pills"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Stock Management</h3>
+          <p>Complete CRUD operations for medicines with FEFO (First-Expiry-First-Out) logic</p>
+          <div class="feature-demo">
+            <div class="demo-pills">
+              <div class="pill pill-1"></div>
+              <div class="pill pill-2"></div>
+              <div class="pill pill-3"></div>
+            </div>
+            <div class="demo-text">Click to see stock demo</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">Try Stock Management</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="feature-card" data-feature="alerts" onclick="handleFeatureClick('alerts')">
+          <div class="feature-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Expiry Alerts</h3>
+          <p>Get notified about medicines nearing expiry dates to minimize waste</p>
+          <div class="feature-demo">
+            <div class="alert-indicator">
+              <div class="alert-dot urgent"></div>
+              <div class="alert-dot warning"></div>
+              <div class="alert-dot normal"></div>
+            </div>
+            <div class="demo-text">Real-time expiry monitoring</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">View Alert System</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="feature-card" data-feature="sales" onclick="handleFeatureClick('sales')">
+          <div class="feature-icon">
+            <i class="fas fa-cash-register"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Sales & Billing</h3>
+          <p>Auto-suggest oldest batch when selling and generate professional bills</p>
+          <div class="feature-demo">
+            <div class="sales-chart">
+              <div class="chart-bar" style="height: 60%"></div>
+              <div class="chart-bar" style="height: 80%"></div>
+              <div class="chart-bar" style="height: 45%"></div>
+              <div class="chart-bar" style="height: 90%"></div>
+            </div>
+            <div class="demo-text">₹15,420 today's sales</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">Start Selling</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="feature-card" data-feature="reports" onclick="handleFeatureClick('reports')">
+          <div class="feature-icon">
+            <i class="fas fa-chart-bar"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Analytics & Reports</h3>
+          <p>Detailed sales analytics with weekly/monthly and medicine-wise reports</p>
+          <div class="feature-demo">
+            <div class="analytics-preview">
+              <div class="analytics-line"></div>
+              <div class="analytics-dots">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+              </div>
+            </div>
+            <div class="demo-text">Advanced analytics</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">View Reports</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="feature-card" data-feature="customer" onclick="handleFeatureClick('customer')">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Customer Management</h3>
+          <p>Manage customer information, purchase history, and build lasting relationships</p>
+          <div class="feature-demo">
+            <div class="customer-network">
+              <div class="customer-node"></div>
+              <div class="customer-node"></div>
+              <div class="customer-node main"></div>
+            </div>
+            <div class="demo-text">Customer insights</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">Manage Customers</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+        <div class="feature-card" data-feature="admin" onclick="handleFeatureClick('admin')">
+          <div class="feature-icon">
+            <i class="fas fa-user-shield"></i>
+            <div class="icon-animation"></div>
+          </div>
+          <h3>Admin Panel</h3>
+          <p>Comprehensive admin controls for user verification and system monitoring</p>
+          <div class="feature-demo">
+            <div class="admin-dashboard">
+              <div class="admin-widget"></div>
+              <div class="admin-widget"></div>
+              <div class="admin-widget"></div>
+            </div>
+            <div class="demo-text">Complete control</div>
+          </div>
+          <div class="feature-action">
+            <span class="action-text">Admin Access</span>
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
