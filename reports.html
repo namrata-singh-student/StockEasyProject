@@ -443,6 +443,31 @@
 
     <script src="js/main.js"></script>
     <script src="js/pages.js"></script>
+
+    <script>
+      // Simple mobile menu fix
+      function toggleMobileMenu() {
+        const menu = document.getElementById('navMenu');
+        
+        if (menu.style.display === 'flex') {
+          menu.style.display = 'none';
+          menu.style.left = '-100%';
+        } else {
+          menu.style.display = 'flex';
+          menu.style.position = 'fixed';
+          menu.style.top = '70px';
+          menu.style.left = '0';
+          menu.style.width = '100%';
+          menu.style.height = 'calc(100vh - 70px)';
+          menu.style.background = 'white';
+          menu.style.flexDirection = 'column';
+          menu.style.alignItems = 'center';
+          menu.style.padding = '40px 20px';
+          menu.style.zIndex = '1000';
+          menu.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+        }
+      }
+    </script>
 </body>
 
 </html>
